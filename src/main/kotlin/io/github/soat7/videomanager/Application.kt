@@ -1,4 +1,4 @@
-package io.github.soat7.videoprocessor
+package io.github.soat7.videomanager
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
