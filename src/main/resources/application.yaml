@@ -1,0 +1,38 @@
+info:
+  project:
+    name: video-processor
+
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  server:
+    port: 8081
+  info.git.mode: full
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+spring:
+  application:
+    name: video-processor
+  codec:
+    max-in-memory-size: 10MB
+  jackson:
+    default-property-inclusion: non_null
+    deserialization:
+      fail_on_unknown_properties: false
+    serialization:
+      fail_on_empty_beans: false
+      write_dates_as_timestamps: false
+    property-naming-strategy: SNAKE_CASE
+  main:
+    web-application-type: reactive
