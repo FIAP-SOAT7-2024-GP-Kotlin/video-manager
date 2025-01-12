@@ -24,7 +24,7 @@ plugins {
     jacoco
 }
 
-group = "io.github.soat7.videoprocessor"
+group = "io.github.soat7.videomanager"
 version = "0.0.1-SNAPSHOT"
 
 java {

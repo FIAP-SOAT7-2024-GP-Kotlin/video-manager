@@ -1,6 +1,6 @@
 info:
   project:
-    name: video-processor
+    name: video-manager
 
 server:
   port: 8080
@@ -23,7 +23,7 @@ management:
 
 spring:
   application:
-    name: video-processor
+    name: video-manager
   codec:
     max-in-memory-size: 10MB
   jackson:

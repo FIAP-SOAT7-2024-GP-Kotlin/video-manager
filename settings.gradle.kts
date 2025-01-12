@@ -1,1 +1,1 @@
-rootProject.name = "video-processor"
+rootProject.name = "video-manager"
