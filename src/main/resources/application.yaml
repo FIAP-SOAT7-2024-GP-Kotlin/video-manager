@@ -24,8 +24,13 @@ management:
 spring:
   application:
     name: video-manager
+
   codec:
     max-in-memory-size: 10MB
+
+  config:
+    import: optional:file:.env[.properties]
+
   jackson:
     default-property-inclusion: non_null
     deserialization:
@@ -34,5 +39,27 @@ spring:
       fail_on_empty_beans: false
       write_dates_as_timestamps: false
     property-naming-strategy: SNAKE_CASE
+
+  flyway:
+    enabled: true
+    schemas: video_manager
+    url: ${FLYWAY_URL}
+    user: ${spring.r2dbc.username}
+    password: ${spring.r2dbc.password}
+    locations: classpath:/db/migration
+    validate-on-migrate: true
+
   main:
     web-application-type: reactive
+
+  r2dbc:
+    driver: postgresql
+    name: video-manager
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    pool:
+      initial-size: 2
+      max-size: 4
+      max-life-time: 30m
+      validation-query: SELECT 1
