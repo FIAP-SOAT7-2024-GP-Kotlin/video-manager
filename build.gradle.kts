@@ -1,4 +1,8 @@
+import java.io.IOException
+import java.util.Properties
+
 val awsSdkVersion: String by ext
+val flywayVersion: String by ext
 val jacksonVersion: String by ext
 val kotestVersion: String by ext
 val kotlinVersion: String by ext
@@ -35,6 +39,13 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+val props = Properties()
+try {
+    props.load(file("$projectDir/.env").inputStream())
+} catch (e: IOException) {
+    println(e.message)
+}
+
 apply {
     plugin("kotlin")
     plugin("kotlin-spring")
@@ -48,6 +59,16 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2024.0.0"
+
+configurations {
+    all {
+        exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+        exclude(group = "ch.qos.logback", module = "logback-classic")
+        exclude(group = "org.apache.logging.log4j", module = "log4j-to-slf4j")
+        exclude(group = "io.arrow-kt", module = "arrow-core-extensions")
+        exclude(group = "io.projectreactor.netty", module = "reactor-netty-http-brave")
+    }
+}
 
 dependencyManagement {
     imports {
@@ -68,6 +89,7 @@ dependencyManagement {
         dependency("org.postgresql:postgresql:$postgresqlVersion")
         dependency("io.r2dbc:r2dbc-postgresql:$postgresR2dbcDriverVersion")
         dependency("com.lmax:disruptor:$lmaxDisruptorVersion")
+        dependency("org.flywaydb:flyway-core:$flywayVersion")
 
         dependency("org.mock-server:mockserver-client-java:$mockServerClientJavaVersions")
     }
@@ -99,7 +121,6 @@ dependencies {
         exclude(group = "org.apache.tomcat.embed", module = "tomcat-embed-el")
     }
 
-
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -121,6 +142,7 @@ dependencies {
         exclude(group = "io.projectreactor.netty", module = "reactor-netty-http-brave")
     }
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.flywaydb:flyway-core")
 
     // Testing
     testImplementation("org.testcontainers:junit-jupiter")
