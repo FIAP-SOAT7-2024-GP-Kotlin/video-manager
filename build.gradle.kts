@@ -17,6 +17,7 @@ val postgresqlVersion: String by ext
 val postgresR2dbcDriverVersion: String by ext
 val resilience4jVersion: String by ext
 val springCloudVersion: String by ext
+val springCloudAwsVersion: String by ext
 val testContainerVersion: String by ext
 
 plugins {
@@ -73,9 +74,9 @@ configurations {
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
-        mavenBom("software.amazon.awssdk:bom:$awsSdkVersion")
         mavenBom("io.github.resilience4j:resilience4j-bom:$resilience4jVersion")
         mavenBom("org.testcontainers:testcontainers-bom:$testContainerVersion")
+        mavenBom("io.awspring.cloud:spring-cloud-aws-dependencies:$springCloudAwsVersion")
     }
 
     dependencies {
@@ -90,15 +91,14 @@ dependencyManagement {
         dependency("io.r2dbc:r2dbc-postgresql:$postgresR2dbcDriverVersion")
         dependency("com.lmax:disruptor:$lmaxDisruptorVersion")
         dependency("org.flywaydb:flyway-core:$flywayVersion")
-
         dependency("org.mock-server:mockserver-client-java:$mockServerClientJavaVersions")
+        dependency("com.amazonaws:aws-java-sdk-s3:$awsSdkVersion")
     }
 }
 
 ext["kotlin.version"] = kotlinVersion
 ext["kotlin-coroutines.version"] = kotlinxCoroutinesVersion
 ext["log4j2.version"] = log4j2Version
-ext["netty.version"] = nettyVersion
 ext["jackson-bom.version"] = jacksonVersion
 
 dependencies {
@@ -134,15 +134,17 @@ dependencies {
     implementation("io.github.resilience4j:resilience4j-retry")
     implementation("io.github.resilience4j:resilience4j-micrometer")
 
-    implementation("software.amazon.awssdk:s3")
-
     // Database
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.postgresql:r2dbc-postgresql") {
         exclude(group = "io.projectreactor.netty", module = "reactor-netty-http-brave")
     }
+
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.flywaydb:flyway-core")
+
+    implementation("com.amazonaws:aws-java-sdk-s3")
+    implementation("commons-io:commons-io:2.14.0")
 
     // Testing
     testImplementation("org.testcontainers:junit-jupiter")
