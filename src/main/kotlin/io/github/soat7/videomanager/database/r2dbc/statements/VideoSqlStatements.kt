@@ -2,11 +2,11 @@ package io.github.soat7.videomanager.database.r2dbc.statements
 
 object VideoSqlStatements {
 
-    private const val TABLE_NAME = "video"
+    private const val TABLE_NAME = "video_manager.video"
 
     private const val ALL_FIELDS = """
         id,
-        user_id
+        user_id,
         name,
         status,
         created_at,
