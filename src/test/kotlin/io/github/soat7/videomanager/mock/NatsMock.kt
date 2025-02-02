@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration
 class NatsMock {
 
     @Bean
-    fun connection() = mockedConnection()
+    fun natsClient() = mockedConnection()
 
     private fun mockedConnection(): Connection {
         return mockk(
