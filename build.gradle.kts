@@ -13,6 +13,7 @@ val log4j2Version: String by ext
 val mockkVersion: String by ext
 val mockServerClientJavaVersions: String by ext
 val nettyVersion: String by ext
+val natsVersion: String by ext
 val postgresqlVersion: String by ext
 val postgresR2dbcDriverVersion: String by ext
 val resilience4jVersion: String by ext
@@ -121,6 +122,8 @@ dependencies {
         exclude(group = "org.apache.tomcat.embed", module = "tomcat-embed-el")
     }
 
+    implementation("io.nats:nats-spring-boot-starter:0.6.0-3.1")
+
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -187,10 +190,53 @@ tasks {
             exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
     }
+
+    jacocoTestReport {
+        reports {
+            xml.required = true
+            csv.required = true
+            html.outputLocation.set(layout.buildDirectory.dir("reports/jacoco/test/html"))
+            xml.outputLocation.set(layout.buildDirectory.file("reports/jacoco/test/jacoco.xml"))
+            csv.outputLocation.set(layout.buildDirectory.file("reports/jacoco/test/jacoco.csv"))
+            classDirectories.setFrom(
+                files(
+                    classDirectories.files.map {
+                        fileTree(it).apply {
+                            exclude("**/mapper/**")
+                            exclude("**/model/**")
+                            exclude("**/api/**")
+                            exclude("**/enum/**")
+                            exclude("**/config/**")
+                            exclude("**/common/**")
+                            exclude("**/exception/*")
+                            exclude("*/Application*")
+                        }
+                    }
+                )
+            )
+        }
+        dependsOn(withType<Test>())
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.85.toBigDecimal()
+                }
+            }
+        }
+    }
+
+    check {
+        dependsOn(jacocoTestCoverageVerification)
+    }
 }
 
 ktlint {
     debug.set(false)
+    this.coloredOutput.set(true)
+    this.outputToConsole.set(true)
 }
 
 springBoot {

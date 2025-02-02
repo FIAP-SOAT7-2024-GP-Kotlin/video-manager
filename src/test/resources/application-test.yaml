@@ -1,0 +1,6 @@
+logging:
+  level:
+    com.ifp.identity.self.service: debug
+    org.testcontainers: info
+    org.flywaydb: error
+    org.mockserver: error

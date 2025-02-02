@@ -38,6 +38,16 @@ class VideoDatabaseRepository(
         .thenReturn(video)
         .awaitSingle()
 
+    override suspend fun update(video: Video): Video = dbClient.sql(VideoSqlStatements.UPDATE)
+        .bind("id", video.id)
+        .bindEnum("status", video.status)
+        .bind("updated_at", video.updatedAt)
+        .bindMapToJson("metadata", video.metadata)
+        .bindOrNull("output_path", video.outputPath)
+        .then()
+        .thenReturn(video)
+        .awaitSingle()
+
     override suspend fun findById(id: UUID): Video? =
         dbClient.sql(VideoSqlStatements.FIND_BY_ID)
             .bind("id", id)

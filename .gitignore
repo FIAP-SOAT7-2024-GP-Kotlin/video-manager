@@ -33,6 +33,12 @@ out/
 /nbdist/
 /.nb-gradle/
 
+### Fleet ###
+.fleet
+
+### .env ###
+.env
+
 ### VS Code ###
 .vscode/
 

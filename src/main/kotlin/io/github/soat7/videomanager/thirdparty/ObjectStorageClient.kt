@@ -18,15 +18,16 @@ import java.io.InputStream
 
 @Component
 class ObjectStorageClient(
-    @Value("\${digital-ocean.spaces.bucket}") private val bucketName: String,
+    @Value("\${digital-ocean.spaces.bucket.name}") private val bucketName: String,
+    @Value("\${digital-ocean.spaces.bucket.path}") private val path: String,
     private val amazonS3: AmazonS3
 ) : ObjectStorageRepository {
 
     private companion object : KLogging()
 
-    override suspend fun putObject(path: String, file: FilePart): FileContent {
+    override suspend fun putObject(file: FilePart): FileContent {
         return try {
-            val key = buildKey(path, file)
+            val key = buildKey(file)
 
             amazonS3.putObject(bucketName, key, file.toInputStream(), file.buildObjectMetadata())
 
@@ -43,7 +44,7 @@ class ObjectStorageClient(
         }
     }
 
-    private fun buildKey(path: String, file: FilePart) =
+    private fun buildKey(file: FilePart) =
         "$path/${FilenameUtils.removeExtension(file.filename())}.${FilenameUtils.getExtension(file.filename())}"
 
     private suspend fun FilePart.toInputStream(): InputStream =

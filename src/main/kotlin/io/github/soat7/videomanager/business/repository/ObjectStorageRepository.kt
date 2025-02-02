@@ -5,5 +5,5 @@ import org.springframework.http.codec.multipart.FilePart
 
 interface ObjectStorageRepository {
 
-    suspend fun putObject(path: String, file: FilePart): FileContent
+    suspend fun putObject(file: FilePart): FileContent
 }

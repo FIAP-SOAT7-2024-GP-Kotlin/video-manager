@@ -2,6 +2,12 @@ info:
   project:
     name: video-manager
 
+logging:
+  level:
+    org.springframework.r2dbc: error
+    org.springframework.web.client: debug
+    io.github.soat7.videomanager: info
+
 server:
   port: 8080
   shutdown: graceful
@@ -73,7 +79,20 @@ digital-ocean:
   spaces:
     region: us-east-1
     credentials:
-      access-key: ${DO_ACCESS_KEY}
-      secret-key: ${DO_SECRET_KEY}
+      access-key: ${DO_ACCESS_KEY:TEST}
+      secret-key: ${DO_SECRET_KEY:TEST}
     endpoint: https://nyc3.digitaloceanspaces.com
-    bucket: soat7-video-manager
+    bucket:
+      name: soat7-video-manager
+      path: videos
+messaging:
+  topics:
+    video-pending: video.pending
+    video-processing: video.processing
+    video-completed: video.completed
+    video-error: video.error
+  group: video-manager
+
+nats:
+  spring:
+    server: ${NATS_SERVERS:nats://localhost:4222}
