@@ -36,6 +36,18 @@ object VideoSqlStatements {
         )
     """
 
+    const val UPDATE = """
+        UPDATE $TABLE_NAME
+        SET
+            name = :name,
+            status = :status,
+            updated_at = :updated_at,
+            metadata = :metadata,
+            input_path = :input_path,
+            output_path = :output_path
+        WHERE id = :id
+    """
+
     const val FIND_BY_USER_ID = """
         SELECT $ALL_FIELDS
         FROM $TABLE_NAME

@@ -10,4 +10,5 @@ interface VideoRepository {
     suspend fun findById(id: UUID): Video?
 
     suspend fun findByUserId(userId: UUID): List<Video>
+    suspend fun update(video: Video): Video?
 }
