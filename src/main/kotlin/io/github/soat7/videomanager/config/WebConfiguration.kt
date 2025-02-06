@@ -19,7 +19,7 @@ class WebConfiguration(
     override fun configureHttpMessageCodecs(configurer: ServerCodecConfigurer) {
         val partReader = DefaultPartHttpMessageReader()
         partReader.setMaxParts(3)
-        partReader.setMaxDiskUsagePerPart(10L * 1000000L) // To 10MB.
+        partReader.setMaxDiskUsagePerPart(10L * 4000000L) // To 10MB.
         partReader.isEnableLoggingRequestDetails = true
 
         val multiPartReader = MultipartHttpMessageReader(partReader)
