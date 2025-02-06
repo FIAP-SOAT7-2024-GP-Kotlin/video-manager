@@ -1,3 +1,5 @@
+[![Coverage](.github/badges/jacoco.svg)](https://github.com/FIAP-SOAT7-2024-GP-Kotlin/video-manager/actions/workflows/main.yml)
+
 # Microserviço de Gerenciamento de Vídeo
 Este é um microserviço que se integra com o Banco de Dados Relacional para persistir dados de usuário e de arquivos de vídeo. E também se integra com DigitalOcean Spaces para baixar arquivos
 de vídeo e utiliza Kotlin e Spring Boot para realizar o gerenciamento.
