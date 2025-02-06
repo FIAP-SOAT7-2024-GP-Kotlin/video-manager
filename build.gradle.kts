@@ -210,6 +210,7 @@ tasks {
                             exclude("**/common/**")
                             exclude("**/exception/*")
                             exclude("*/Application*")
+                            exclude("**/webservice/api/response/ErrorResponse*")
                         }
                     }
                 )
