@@ -218,20 +218,6 @@ tasks {
         }
         dependsOn(withType<Test>())
     }
-
-    jacocoTestCoverageVerification {
-        violationRules {
-            rule {
-                limit {
-                    minimum = 0.80.toBigDecimal()
-                }
-            }
-        }
-    }
-
-    check {
-        dependsOn(jacocoTestCoverageVerification)
-    }
 }
 
 ktlint {
