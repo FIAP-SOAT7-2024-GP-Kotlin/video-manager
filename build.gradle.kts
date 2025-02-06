@@ -218,20 +218,19 @@ tasks {
         dependsOn(withType<Test>())
     }
 
-// TODO Temporary disable unitl tests are implemented
-//    jacocoTestCoverageVerification {
-//        violationRules {
-//            rule {
-//                limit {
-//                    minimum = 0.85.toBigDecimal()
-//                }
-//            }
-//        }
-//    }
-//
-//    check {
-//        dependsOn(jacocoTestCoverageVerification)
-//    }
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.80.toBigDecimal()
+                }
+            }
+        }
+    }
+
+    check {
+        dependsOn(jacocoTestCoverageVerification)
+    }
 }
 
 ktlint {

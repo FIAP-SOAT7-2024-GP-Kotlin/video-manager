@@ -39,11 +39,9 @@ object VideoSqlStatements {
     const val UPDATE = """
         UPDATE $TABLE_NAME
         SET
-            name = :name,
             status = :status,
             updated_at = :updated_at,
             metadata = :metadata,
-            input_path = :input_path,
             output_path = :output_path
         WHERE id = :id
     """
