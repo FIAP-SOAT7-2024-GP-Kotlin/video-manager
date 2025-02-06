@@ -54,7 +54,7 @@ class VideoIT : BaseIntegrationTest() {
         Assertions.assertAll(
             Executable { Assertions.assertNotNull(response) },
             Executable { assertThat(response).isNotEmpty },
-            Executable { Assertions.assertEquals(video.id, response!!.first().id) },
+            Executable { Assertions.assertEquals(video.id, response!!.first().id) }
         )
     }
 }
