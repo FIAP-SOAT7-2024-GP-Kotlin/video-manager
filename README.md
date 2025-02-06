@@ -1,5 +1,3 @@
-[![Coverage](.github/badges/jacoco.svg)](https://github.com/FIAP-SOAT7-2024-GP-Kotlin/video-manager/actions/workflows/main.yml)
-
 # Microserviço de Gerenciamento de Vídeo
 Este é um microserviço que se integra com o Banco de Dados Relacional para persistir dados de usuário e de arquivos de vídeo. E também se integra com DigitalOcean Spaces para baixar arquivos
 de vídeo e utiliza Kotlin e Spring Boot para realizar o gerenciamento.
@@ -47,3 +45,19 @@ metadata:
 ## Testes
 ### Execução de Testes Unitários
 > ./gradlew test
+---
+## Coverage
+![img.png](img.png)
+
+---
+## Contatos
+
+### Grupo composto pelos os alunos
+
+| Nome                         | RM       |
+|------------------------------|----------|
+| André Luis dos Santos        | RM355299 |
+| Fernando Florencio           | RM355268 |
+| Luiz Fernando Calazans       | RM354794 |
+| José Carlos dos Santos Rocha | RM355769 |
+| Rafael José Peres Correia    | RM355308 |
