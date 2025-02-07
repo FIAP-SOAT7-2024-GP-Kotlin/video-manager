@@ -9,7 +9,7 @@ logging:
     io.github.soat7.videomanager: info
 
 server:
-  port: 8090
+  port: 8080
   shutdown: graceful
 
 management:
