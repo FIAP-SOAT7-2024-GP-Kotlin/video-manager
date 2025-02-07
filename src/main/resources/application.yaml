@@ -9,7 +9,7 @@ logging:
     io.github.soat7.videomanager: info
 
 server:
-  port: 8080
+  port: 8090
   shutdown: graceful
 
 management:
@@ -21,6 +21,12 @@ management:
       show-details: always
       probes:
         enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    access:
+      default: unrestricted
   health:
     livenessstate:
       enabled: true
