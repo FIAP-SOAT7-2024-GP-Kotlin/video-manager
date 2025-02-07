@@ -6,7 +6,6 @@ import io.github.soat7.videomanager.business.exception.ReasonCodeException
 import io.github.soat7.videomanager.business.exception.enum.ReasonCode
 import io.github.soat7.videomanager.webservice.api.ErrorResponse
 import mu.KLogging
-import mu.withLoggingContext
 import org.springframework.core.annotation.Order
 import org.springframework.core.io.buffer.DataBuffer
 import org.springframework.http.HttpStatus
