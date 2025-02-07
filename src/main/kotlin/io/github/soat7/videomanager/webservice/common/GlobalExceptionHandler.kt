@@ -62,21 +62,9 @@ internal class GlobalExceptionHandler(
 
     private fun log(t: Throwable, error: HttpError) {
         if (error.httpStatus == HttpStatus.INTERNAL_SERVER_ERROR) {
-            withLoggingContext(
-                "exception" to t.javaClass.simpleName,
-                "status" to error.httpStatus.value().toString(),
-                "code" to error.code,
-                "message" to t.message,
-                "cause" to t.cause.toString()
-            ) { logger.error(t) { "Internal Server error | message: [${t.message}]" } }
+            logger.error(t) { "Internal Server error | message: [${t.message}]" }
         } else {
-            withLoggingContext(
-                "exception" to t.javaClass.simpleName,
-                "status" to error.httpStatus.value().toString(),
-                "code" to error.code,
-                "message" to t.message,
-                "cause" to t.cause.toString()
-            ) { logger.warn { "Unexpected error | message: [${t.message}]" } }
+            logger.warn(t) { "Unexpected error | message: [${t.message}]" }
         }
     }
 }
