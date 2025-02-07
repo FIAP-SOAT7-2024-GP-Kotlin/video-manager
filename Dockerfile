@@ -9,7 +9,7 @@ RUN ./gradlew clean build --no-daemon -x test
 
 FROM eclipse-temurin:21-jdk-alpine
 
-EXPOSE 8080
+EXPOSE 8080 8081
 
 RUN mkdir /app
 

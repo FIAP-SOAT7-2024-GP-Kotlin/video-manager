@@ -10,14 +10,14 @@ jobs:
     steps:
     - name: Checkout sources
       uses: actions/checkout@v4
-      
+
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: 21
         cache: 'gradle'
-        
+
     - name: Setup Gradle [Video-Manager ≡]
       uses: gradle/actions/setup-gradle@v3
       with:
@@ -27,7 +27,7 @@ jobs:
 
     - name: Run build [Video-Manager ≡]
       run: ./gradlew clean build --no-daemon -x test
-        
+
     - name: Run tests [Video-Manager ≡]
       run: ./gradlew test --info --stacktrace
 
@@ -62,5 +62,5 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          fiapmyburguer/myburgercontrol-clean-arch:${{ steps.date.outputs.date }}
-          fiapmyburguer/myburgercontrol-clean-arch:latest
+          fiapmyburguer/my-video-manager:${{ steps.date.outputs.date }}
+          fiapmyburguer/my-video-manager:latest
